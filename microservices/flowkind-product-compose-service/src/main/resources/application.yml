@@ -1,3 +1,24 @@
+springdoc:
+  api-docs:
+    enabled: true
+    path: /openapi/v3/api-docs
+  swagger-ui:
+    path: /openapi/swagger-ui.html
+  packages-to-scan: app.flowkind.microservices.compose.product
+  paths-to-match: /**
+
+api:
+  common:
+    version: 1.0.0
+    title: Product Composite Service
+    description: This will give overall details of review,recommendation for product
+    termsOfService: Opensource
+    license: MIT
+    licenseURL:
+
+
+
+
 server.port: 7000
 server.error.include-message: always
 
