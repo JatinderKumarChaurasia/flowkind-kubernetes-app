@@ -38,7 +38,9 @@ jobs:
           name: Package
           path: build/libs
       - name: build images using docker-compose
-        run: docker-compose up --build -d
+        run: docker-compose build
+      - name: running images
+        run: docker-compose up
       - name: getting running process
         run: docker-compose ps
       - name: stopping the image
