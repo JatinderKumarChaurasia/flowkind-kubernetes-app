@@ -1,6 +1,5 @@
 name: Flowkind Kubernetes App Build
-on:
-  - push
+on: [push]
 jobs:
   Flowkind-App-Build-Actions:
     strategy:
