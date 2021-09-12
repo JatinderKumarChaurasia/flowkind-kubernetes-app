@@ -38,7 +38,7 @@ jobs:
           name: Package
           path: build/libs
       - name: build images using docker-compose
-        run: docker-compose build
+        run: docker-compose build --parallel
       - name: running images
         run: docker-compose up -d
       - name: getting running process
