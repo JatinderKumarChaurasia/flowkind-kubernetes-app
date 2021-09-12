@@ -1,0 +1,58 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'app.flowkind.microservices.core.recommendation'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '16'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+jar {
+    enabled = false
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+//    withJavadocJar()
+    withSourcesJar()
+}
+
+build.doFirst {
+    println "cleaning project"
+    clean
+}
+
+distsDirName = "$projectDir/dist"
+//buildDir = 'libs'
+libsDirName = "$projectDir/lib"
+
+clean.doFirst {
+    delete "${projectDir}/lib/*"
+    delete "${projectDir}/dist/*"
+}
+
+dependencies {
+    implementation project(':flowkind-microservices-api')
+    implementation project(':flowkind-microservices-utils')
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}

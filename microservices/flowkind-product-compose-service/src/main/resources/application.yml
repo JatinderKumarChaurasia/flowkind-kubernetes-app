@@ -1,0 +1,18 @@
+server.port: 7000
+server.error.include-message: always
+
+logging:
+  level:
+    root: INFO
+    app.flowkind: DEBUG
+
+flowkind-app:
+  flowkind-core-product-service:
+    host: localhost
+    port: 7001
+  flowkind-core-review-service:
+    host: localhost
+    port: 7002
+  flowkind-core-recommendation-service:
+    host: localhost
+    port: 7003

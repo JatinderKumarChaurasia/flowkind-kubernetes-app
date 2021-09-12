@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  product:
+    build: microservices/flowkind-core-product-service
+    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-service
+    container_name: product-service
+    mem_reservation: '512m'
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  recommendation:
+    build: microservices/flowkind-core-recommendation-service
+    profiles:
+      - docker
+    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/recommendation-service
+    container_name: recommendation-service
+    mem_reservation: 512m
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+
+  review:
+    build: microservices/flowkind-core-review-service
+    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/review-service
+    container_name: review-service
+    mem_reservation: 512m
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+
+  product-composite:
+    build: microservices/flowkind-product-compose-service
+    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-composite-service
+    container_name: product-composite-service
+    mem_reservation: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"

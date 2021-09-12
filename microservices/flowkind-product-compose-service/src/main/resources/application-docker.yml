@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: docker
+server:
+  port: 8080
+
+flowkind-app:
+  flowkind-core-product-service:
+    host: product
+    port: 7001
+  flowkind-core-review-service:
+    host: review
+    port: 7002
+  flowkind-core-recommendation-service:
+    host: recommendation
+    port: 7003

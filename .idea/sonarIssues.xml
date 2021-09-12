@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="issues">
+    <option name="index">
+      <map>
+        <entry key="/Dummy.txt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/docker-compose.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/ProductAggregate.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/ProductCompositeService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/RecommendationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/RecommendationSummary.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/ReviewSummary.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/composite/product/ServiceAddresses.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/product/Product.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/product/ProductService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/recommendation/Recommendation.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/recommendation/Recommendation1.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/recommendation/RecommendationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/review/Review.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/core/review/ReviewService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/exceptions/InvalidInputException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/exceptions/NotFoundException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-utils/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-utils/src/main/java/app/flowkind/microservices/utils/http/GlobalControllerExceptionHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-utils/src/main/java/app/flowkind/microservices/utils/http/HttpErrorInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-utils/src/main/java/app/flowkind/microservices/utils/http/ServiceUtil.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-utils/src/test/java/app/flowkind/microservices/utils/FlowkindMicroservicesUtilsApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/FlowkindCoreProductServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/services/ProductServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/FlowkindCoreRecommendationServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/services/RecommendationServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/java/app/flowkind/microservices/core/recommendation/FlowkindCoreRecommendationServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/build/reports/tests/test/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/FlowkindCoreReviewServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/services/ReviewServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/java/app/flowkind/microservices/core/review/FlowkindCoreReviewServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/Dockerfile">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/main/java/app/flowkind/microservices/compose/product/FlowkindProductComposeServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/main/java/app/flowkind/microservices/compose/product/services/ProductCompositeIntegration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/main/java/app/flowkind/microservices/compose/product/services/ProductCompositeServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-product-compose-service/src/test/java/app/flowkind/microservices/compose/product/FlowkindProductComposeServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/settings.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
