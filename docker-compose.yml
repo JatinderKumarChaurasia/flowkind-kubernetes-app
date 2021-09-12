@@ -1,9 +1,10 @@
 version: '3.8'
-
+# using github container registry
 services:
   product:
     build: microservices/flowkind-core-product-service
-    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-service
+    image: ghcr.io/jatinderkumarchaurasia/flowkind/product-service
+    #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-service
     container_name: product-service
     mem_reservation: '512m'
     environment:
@@ -13,7 +14,8 @@ services:
     build: microservices/flowkind-core-recommendation-service
     profiles:
       - docker
-    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/recommendation-service
+    image: ghcr.io/jatinderkumarchaurasia/flowkind/recommendation-service
+#    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/recommendation-service
     container_name: recommendation-service
     mem_reservation: 512m
     environment:
@@ -21,7 +23,8 @@ services:
 
   review:
     build: microservices/flowkind-core-review-service
-    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/review-service
+    image: ghcr.io/jatinderkumarchaurasia/flowkind/review-service
+    #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/review-service
     container_name: review-service
     mem_reservation: 512m
     environment:
@@ -29,7 +32,8 @@ services:
 
   product-composite:
     build: microservices/flowkind-product-compose-service
-    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-composite-service
+    image: ghcr.io/jatinderkumarchaurasia/flowkind/product-composite-service
+    #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-composite-service
     container_name: product-composite-service
     mem_reservation: 512m
     ports:
