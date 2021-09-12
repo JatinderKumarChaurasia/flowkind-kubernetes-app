@@ -40,7 +40,7 @@ jobs:
       - name: build images using docker-compose
         run: docker-compose build
       - name: running images
-        run: docker-compose up
+        run: docker-compose up -d
       - name: getting running process
         run: docker-compose ps
       - name: stopping the image
