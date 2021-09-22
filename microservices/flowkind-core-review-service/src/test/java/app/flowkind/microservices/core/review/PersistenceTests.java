@@ -3,6 +3,7 @@ package app.flowkind.microservices.core.review;
 
 import app.flowkind.microservices.core.review.persistence.ReviewEntity;
 import app.flowkind.microservices.core.review.persistence.ReviewRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,6 +30,7 @@ class PersistenceTests extends MySqlTestBase{
     private ReviewRepository reviewRepository;
     private ReviewEntity savedEntity;
 
+    @BeforeEach
     void setUpDatabase() {
         reviewRepository.deleteAll();
         ReviewEntity reviewEntity = new ReviewEntity(1,2,"author","subject","content");
@@ -87,7 +89,7 @@ class PersistenceTests extends MySqlTestBase{
         });
         ReviewEntity updatedReviewEntity = reviewRepository.findById(savedEntity.getId()).orElseThrow();
 
-        assertEquals(1, (int)updatedReviewEntity.getVersion());
+        assertEquals(1, updatedReviewEntity.getVersion());
         assertEquals("a1", updatedReviewEntity.getAuthor());
     }
 

@@ -7,7 +7,7 @@ plugins {
 
 group = 'app.flowkind.microservices.api'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -15,10 +15,10 @@ repositories {
 bootJar.enabled = false
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux:2.5.4'
     implementation 'org.springdoc:springdoc-openapi-common:1.5.10'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+    testImplementation 'io.projectreactor:reactor-test:3.4.10'
 }
 
 test {

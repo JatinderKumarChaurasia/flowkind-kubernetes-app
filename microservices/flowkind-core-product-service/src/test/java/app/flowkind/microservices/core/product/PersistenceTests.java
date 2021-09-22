@@ -2,7 +2,7 @@ package app.flowkind.microservices.core.product;
 
 import app.flowkind.microservices.core.product.persistence.ProductEntity;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
-import com.mongodb.DuplicateKeyException;
+import org.springframework.dao.DuplicateKeyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

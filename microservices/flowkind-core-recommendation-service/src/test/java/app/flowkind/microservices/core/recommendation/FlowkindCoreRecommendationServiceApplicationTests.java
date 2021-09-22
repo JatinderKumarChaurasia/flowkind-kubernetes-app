@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments.just;
+import static reactor.core.publisher.Mono.just;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
@@ -46,8 +46,8 @@ class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
         int productID = 1;
         int recommendationID = 1;
         postAndVerifyRecommendation(productID, recommendationID, HttpStatus.OK)
-                .jsonPath("$.productId").isEqualTo(productID)
-                .jsonPath("$.recommendationId").isEqualTo(recommendationID);
+                .jsonPath("$.productID").isEqualTo(productID)
+                .jsonPath("$.recommendationID").isEqualTo(recommendationID);
         assertEquals(1, recommendationRepository.count());
         postAndVerifyRecommendation(productID, recommendationID, HttpStatus.UNPROCESSABLE_ENTITY)
                 .jsonPath("$.path").isEqualTo("/recommendation")

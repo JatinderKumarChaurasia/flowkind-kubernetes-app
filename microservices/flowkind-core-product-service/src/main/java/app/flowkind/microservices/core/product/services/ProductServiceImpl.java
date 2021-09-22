@@ -7,7 +7,7 @@ import app.flowkind.microservices.api.exceptions.NotFoundException;
 import app.flowkind.microservices.core.product.persistence.ProductEntity;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
 import app.flowkind.microservices.utils.http.ServiceUtil;
-import com.mongodb.DuplicateKeyException;
+import org.springframework.dao.DuplicateKeyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

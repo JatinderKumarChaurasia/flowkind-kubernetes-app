@@ -2,8 +2,7 @@ package app.flowkind.microservices.core.product;
 
 import app.flowkind.microservices.api.core.product.Product;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static reactor.core.publisher.Mono.just;
 
+@TestInstance(value = TestInstance.Lifecycle.PER_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FlowkindCoreProductServiceApplicationTests extends MongoDbTestBase{
 
@@ -24,6 +24,11 @@ class FlowkindCoreProductServiceApplicationTests extends MongoDbTestBase{
 
     @BeforeEach
     void setUpDatabase() {
+        productRepository.deleteAll();
+    }
+
+    @AfterEach
+    void cleanUpTestResult() {
         productRepository.deleteAll();
     }
 
