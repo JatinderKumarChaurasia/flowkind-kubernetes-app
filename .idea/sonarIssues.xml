@@ -13,7 +13,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/.gitattributes">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/.github/workflows/github-actions-build.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/.gitignore">
           <value>
             <set />
           </value>
@@ -98,6 +108,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/exceptions/BadRequestException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/flowkind-microservices-api/src/main/java/app/flowkind/microservices/api/exceptions/InvalidInputException.java">
           <value>
             <set />
@@ -143,7 +158,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/build/generated/sources/annotationProcessor/java/main/app/flowkind/microservices/core/product/services/ProductMapperImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/FlowkindCoreProductServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/persistence/ProductEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/persistence/ProductRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/java/app/flowkind/microservices/core/product/services/ProductMapper.java">
           <value>
             <set />
           </value>
@@ -159,6 +194,31 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/test/java/app/flowkind/microservices/core/product/FlowkindCoreProductServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/test/java/app/flowkind/microservices/core/product/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/test/java/app/flowkind/microservices/core/product/MongoDbTestBase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/test/java/app/flowkind/microservices/core/product/PersistenceTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-product-service/src/test/resources/logback.xml">
           <value>
             <set />
           </value>
@@ -183,6 +243,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/persistence/RecommendationEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/persistence/RecommendationRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/services/RecommendationMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/main/java/app/flowkind/microservices/core/recommendation/services/RecommendationServiceImpl.java">
           <value>
             <set />
@@ -199,6 +274,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/java/app/flowkind/microservices/core/recommendation/FlowkindCoreRecommendationServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/java/app/flowkind/microservices/core/recommendation/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/java/app/flowkind/microservices/core/recommendation/MongoDbTestBase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/java/app/flowkind/microservices/core/recommendation/PersistenceTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service/src/test/resources/logback.xml">
           <value>
             <set />
           </value>
@@ -223,6 +318,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/persistence/ReviewEntity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/persistence/ReviewRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/services/ReviewMapper.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/main/java/app/flowkind/microservices/core/review/services/ReviewServiceImpl.java">
           <value>
             <set />
@@ -239,6 +349,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/java/app/flowkind/microservices/core/review/FlowkindCoreReviewServiceApplicationTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/java/app/flowkind/microservices/core/review/MapperTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/java/app/flowkind/microservices/core/review/MySqlTestBase.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/java/app/flowkind/microservices/core/review/PersistenceTests.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/microservices/flowkind-core-review-service/src/test/resources/logback.xml">
           <value>
             <set />
           </value>

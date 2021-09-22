@@ -1,8 +1,17 @@
 server.port: 7001
 server.error.include-message: always
 
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: product-db
+#      uri: mongodb+srv://absolutechemist:absolutechemist@flowkind.twyiq.mongodb.net/products-db?retryWrites=true&w=majority
+      repositories:
+        type: auto
+
 logging:
   level:
     root: INFO
     app.flowkind: DEBUG
-

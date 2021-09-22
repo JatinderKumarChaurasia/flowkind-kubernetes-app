@@ -1,5 +1,6 @@
 package app.flowkind.microservices.utils.http;
 
+import app.flowkind.microservices.api.exceptions.BadRequestException;
 import app.flowkind.microservices.api.exceptions.InvalidInputException;
 import app.flowkind.microservices.api.exceptions.NotFoundException;
 import org.slf4j.Logger;
@@ -25,6 +26,12 @@ class GlobalControllerExceptionHandler {
     @ExceptionHandler(value = InvalidInputException.class)
     public @ResponseBody HttpErrorInfo handleInvalidInputExceptions(ServerHttpRequest serverHttpRequest, InvalidInputException invalidInputException) {
         return createHttpErrorInfo(HttpStatus.UNPROCESSABLE_ENTITY,serverHttpRequest,invalidInputException);
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = BadRequestException.class)
+    public @ResponseBody HttpErrorInfo handleBadRequestExceptions(ServerHttpRequest serverHttpRequest, BadRequestException badRequestException) {
+        return createHttpErrorInfo(HttpStatus.BAD_REQUEST, serverHttpRequest, badRequestException);
     }
 
     private HttpErrorInfo createHttpErrorInfo(HttpStatus httpStatus,ServerHttpRequest serverHttpRequest, Exception exception) {

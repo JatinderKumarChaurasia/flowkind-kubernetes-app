@@ -5,11 +5,27 @@
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.4.2.Final/e55bd90d51cddd638c07d5bd89fc7535d4e3d069/mapstruct-processor-1.4.2.Final.jar" />
+        </processorPath>
+        <module name="flowkind-kubernetes-app.microservices.flowkind-core-review-service.test" />
+        <module name="flowkind-kubernetes-app.microservices.flowkind-core-product-service.test" />
+        <module name="flowkind-kubernetes-app.microservices.flowkind-core-recommendation-service.test" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.4.2.Final/e55bd90d51cddd638c07d5bd89fc7535d4e3d069/mapstruct-processor-1.4.2.Final.jar" />
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.5.4/aaddc23ff2517732cbafb9dafbfe30a6714112b0/spring-boot-configuration-processor-2.5.4.jar" />
         </processorPath>
         <module name="flowkind-kubernetes-app.microservices.flowkind-core-product-service.main" />
         <module name="flowkind-kubernetes-app.microservices.flowkind-core-review-service.main" />
         <module name="flowkind-kubernetes-app.microservices.flowkind-core-recommendation-service.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.5.4/aaddc23ff2517732cbafb9dafbfe30a6714112b0/spring-boot-configuration-processor-2.5.4.jar" />
+        </processorPath>
         <module name="flowkind-kubernetes-app.microservices.flowkind-product-compose-service.main" />
       </profile>
     </annotationProcessing>

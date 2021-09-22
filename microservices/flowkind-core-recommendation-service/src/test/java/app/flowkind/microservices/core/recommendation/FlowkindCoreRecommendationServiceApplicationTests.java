@@ -1,6 +1,8 @@
 package app.flowkind.microservices.core.recommendation;
 
 import app.flowkind.microservices.api.core.recommendation.Recommendation;
+import app.flowkind.microservices.core.recommendation.persistence.RecommendationRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,57 +10,72 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.data.repository.core.support.RepositoryComposition.RepositoryFragments.just;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class FlowkindCoreRecommendationServiceApplicationTests {
+class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
 
     @Autowired
     private WebTestClient webTestClient;
 
+    @Autowired
+    private RecommendationRepository recommendationRepository;
+
+    @BeforeEach
+    void setupDb() {
+        recommendationRepository.deleteAll();
+    }
+
     @Test
     void getRecommendationsByProductID() {
         int productID=1;
-        webTestClient.get()
-                .uri("/recommendation?productID="+productID)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange().expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody().jsonPath("$.length()").isEqualTo(3)
-                .jsonPath("$[0].productID").isEqualTo(productID);
-//        String value = webTestClient.get()
-//                .uri("/recommendation?productID="+productID)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .exchange().expectStatus().isOk()
-//                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-//                .expectBody().jsonPath("$.length()").isEqualTo(3)
-//                .jsonPath("$").isEqualTo(productID)
-//                .returnResult().toString();
-//        System.out.println(value);
+        postAndVerifyRecommendation(productID, 1, HttpStatus.OK);
+        postAndVerifyRecommendation(productID, 2, HttpStatus.OK);
+        postAndVerifyRecommendation(productID, 3, HttpStatus.OK);
+
+        assertEquals(3, recommendationRepository.findByProductID(productID).size());
+        getAndVerifyRecommendationsByProductID(productID, HttpStatus.OK)
+                .jsonPath("$.length()").isEqualTo(3)
+                .jsonPath("$[2].productID").isEqualTo(productID)
+                .jsonPath("$[2].recommendationID").isEqualTo(3);
+    }
+
+    @Test
+    void duplicateError() {
+        int productID = 1;
+        int recommendationID = 1;
+        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.OK)
+                .jsonPath("$.productId").isEqualTo(productID)
+                .jsonPath("$.recommendationId").isEqualTo(recommendationID);
+        assertEquals(1, recommendationRepository.count());
+        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.UNPROCESSABLE_ENTITY)
+                .jsonPath("$.path").isEqualTo("/recommendation")
+                .jsonPath("$.message").isEqualTo("Duplicate key, Product Id: 1, Recommendation Id:1");
+        assertEquals(1, recommendationRepository.count());
+    }
+
+    @Test
+    void deleteRecommendations() {
+        int productID = 1;
+        int recommendationID = 1;
+        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.OK);
+        assertEquals(1, recommendationRepository.findByProductID(productID).size());
+        deleteAndVerifyRecommendationsByProductId(productID, HttpStatus.OK);
+        assertEquals(0, recommendationRepository.findByProductID(productID).size());
+        deleteAndVerifyRecommendationsByProductId(productID, HttpStatus.OK);
     }
 
     @Test
     void getRecommendationsMissingParameter() {
-        webTestClient.get()
-                .uri("/recommendation")
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(HttpStatus.BAD_REQUEST)
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
+        getAndVerifyRecommendationsByProductID("", HttpStatus.BAD_REQUEST)
                 .jsonPath("$.path").isEqualTo("/recommendation")
                 .jsonPath("$.message").isEqualTo("Required int parameter 'productID' is not present");
     }
 
     @Test
     void getRecommendationsInvalidParameter() {
-        webTestClient.get()
-                .uri("/recommendation?productID=no-integer")
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(HttpStatus.BAD_REQUEST)
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
+        getAndVerifyRecommendationsByProductID("?productID=no-integer", HttpStatus.BAD_REQUEST)
                 .jsonPath("$.path").isEqualTo("/recommendation")
                 .jsonPath("$.message").isEqualTo("Type mismatch.");
     }
@@ -66,13 +83,7 @@ class FlowkindCoreRecommendationServiceApplicationTests {
     @Test
     void getRecommendationsNotFound() {
         int productIDNotFound = 113;
-        webTestClient.get()
-                .uri("/recommendation?productID=" + productIDNotFound)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isOk()
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
+        getAndVerifyRecommendationsByProductID("?productID="+productIDNotFound,HttpStatus.OK)
                 .jsonPath("$.length()").isEqualTo(0);
     }
 
@@ -80,13 +91,43 @@ class FlowkindCoreRecommendationServiceApplicationTests {
     void getRecommendationsInvalidParameterNegativeValue() {
         System.out.println("Getting Negative Value");
         int productIDInvalid = -1;
-        webTestClient.get()
-                .uri("/recommendation?productID=" + productIDInvalid)
+        getAndVerifyRecommendationsByProductID("?productID="+productIDInvalid,HttpStatus.UNPROCESSABLE_ENTITY)
+                .jsonPath("$.path").isEqualTo("/recommendation")
+                .jsonPath("$.message").isEqualTo("Invalid productID: " + productIDInvalid);
+    }
+
+    private WebTestClient.BodyContentSpec getAndVerifyRecommendationsByProductID(int productID, HttpStatus expectedStatus) {
+        return getAndVerifyRecommendationsByProductID("?productID=" + productID, expectedStatus);
+    }
+
+    private WebTestClient.BodyContentSpec getAndVerifyRecommendationsByProductID(String productIDQuery, HttpStatus expectedStatus) {
+        return webTestClient.get()
+                .uri("/recommendation" + productIDQuery)
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
-                .expectStatus().isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY)
+                .expectStatus().isEqualTo(expectedStatus)
                 .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody()
-                .jsonPath("$.path").isEqualTo("/recommendation");
+                .expectBody();
+    }
+
+    private WebTestClient.BodyContentSpec postAndVerifyRecommendation(int productID, int recommendationID, HttpStatus expectedStatus) {
+        Recommendation recommendation = new Recommendation(productID, recommendationID, "Author " + recommendationID, recommendationID, "Content " + recommendationID, "SA");
+        return webTestClient.post()
+                .uri("/recommendation")
+                .body(just(recommendation), Recommendation.class)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isEqualTo(expectedStatus)
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody();
+    }
+
+    private WebTestClient.BodyContentSpec deleteAndVerifyRecommendationsByProductId(int productID, HttpStatus expectedStatus) {
+        return webTestClient.delete()
+                .uri("/recommendation?productID=" + productID)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange()
+                .expectStatus().isEqualTo(expectedStatus)
+                .expectBody();
     }
 }

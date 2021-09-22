@@ -8,10 +8,10 @@ server:
 flowkind-app:
   flowkind-core-product-service:
     host: product
-    port: 7001
+    port: 8080
   flowkind-core-review-service:
     host: review
-    port: 7002
+    port: 8080
   flowkind-core-recommendation-service:
     host: recommendation
-    port: 7003
+    port: 8080
