@@ -1,8 +1,8 @@
-FROM openjdk:16
+FROM openjdk:17
 ARG JAR_FILE=lib/flowkind-core-review-service-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
-#EXPOSE 8080
+EXPOSE 8080
 
 #FROM openjdk:16 as builder
 #WORKDIR extracted

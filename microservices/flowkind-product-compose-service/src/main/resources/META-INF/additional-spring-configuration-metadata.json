@@ -1,0 +1,138 @@
+{
+  "properties": [
+    {
+      "name": "flowkind-app.flowkind-core-product-service.host",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-product-service.host."
+    },
+    {
+      "name": "flowkind-app.flowkind-core-product-service.port",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-product-service.port."
+    },
+    {
+      "name": "flowkind-app.flowkind-core-recommendation-service.port",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-recommendation-service.port."
+    },
+    {
+      "name": "flowkind-app.flowkind-core-recommendation-service.host",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-recommendation-service.host."
+    },
+    {
+      "name": "flowkind-app.flowkind-core-review-service.port",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-review-service.port."
+    },
+    {
+      "name": "flowkind-app.flowkind-core-review-service.host",
+      "type": "java.lang.String",
+      "description": "Description for flowkind-app.flowkind-core-review-service.host."
+    },
+    {
+      "name": "api.product-composite.delete-composite-product.notes",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.delete-composite-product.notes."
+    },
+    {
+      "name": "api.product-composite.delete-composite-product.description",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.delete-composite-product.description."
+    },
+    {
+      "name": "api.product-composite.create-composite-product.notes",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.create-composite-product.notes."
+    },
+    {
+      "name": "api.product-composite.create-composite-product.description",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.create-composite-product.description."
+    },
+    {
+      "name": "api.product-composite.get-composite-product.notes",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.get-composite-product.notes."
+    },
+    {
+      "name": "api.product-composite.get-composite-product.description",
+      "type": "java.lang.String",
+      "description": "Description for api.product-composite.get-composite-product.description."
+    },
+    {
+      "name": "api.responseCodes.unprocessableEntity.description",
+      "type": "java.lang.String",
+      "description": "Description for api.responseCodes.unprocessableEntity.description."
+    },
+    {
+      "name": "api.responseCodes.notFound.description",
+      "type": "java.lang.String",
+      "description": "Description for api.responseCodes.notFound.description."
+    },
+    {
+      "name": "api.responseCodes.badRequest.description",
+      "type": "java.lang.String",
+      "description": "Description for api.responseCodes.badRequest.description."
+    },
+    {
+      "name": "api.responseCodes.ok.description",
+      "type": "java.lang.String",
+      "description": "Description for api.responseCodes.ok.description."
+    },
+    {
+      "name": "api.common.contact.email",
+      "type": "java.lang.String",
+      "description": "Description for api.common.contact.email."
+    },
+    {
+      "name": "api.common.contact.url",
+      "type": "java.lang.String",
+      "description": "Description for api.common.contact.url."
+    },
+    {
+      "name": "api.common.contact.name",
+      "type": "java.lang.String",
+      "description": "Description for api.common.contact.name."
+    },
+    {
+      "name": "api.common.externalDocDesc",
+      "type": "java.lang.String",
+      "description": "Description for api.common.externalDocDesc."
+    },
+    {
+      "name": "api.common.externalDocUrl",
+      "type": "java.lang.String",
+      "description": "Description for api.common.externalDocUrl."
+    },
+    {
+      "name": "api.common.licenseURL",
+      "type": "java.lang.String",
+      "description": "Description for api.common.licenseURL."
+    },
+    {
+      "name": "api.common.license",
+      "type": "java.lang.String",
+      "description": "Description for api.common.license."
+    },
+    {
+      "name": "api.common.termsOfService",
+      "type": "java.lang.String",
+      "description": "Description for api.common.termsOfService."
+    },
+    {
+      "name": "api.common.description",
+      "type": "java.lang.String",
+      "description": "Description for api.common.description."
+    },
+    {
+      "name": "api.common.title",
+      "type": "java.lang.String",
+      "description": "Description for api.common.title."
+    },
+    {
+      "name": "api.common.version",
+      "type": "java.lang.String",
+      "description": "Description for api.common.version."
+    }
+  ] }

@@ -8,35 +8,68 @@ services:
     container_name: product-service
     mem_reservation: '512m'
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
 
   recommendation:
     build: microservices/flowkind-core-recommendation-service
-    profiles:
-      - docker
     image: ghcr.io/jatinderkumarchaurasia/flowkind/recommendation-service
 #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/recommendation-service
     container_name: recommendation-service
-    mem_reservation: 512m
+    mem_reservation: 256m
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mongodb
 
   review:
     build: microservices/flowkind-core-review-service
     image: ghcr.io/jatinderkumarchaurasia/flowkind/review-service
     #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/review-service
     container_name: review-service
-    mem_reservation: 512m
+    mem_reservation: 256m
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - mysql
 
   product-composite:
     build: microservices/flowkind-product-compose-service
     image: ghcr.io/jatinderkumarchaurasia/flowkind/product-composite-service
     #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-composite-service
     container_name: product-composite-service
-    mem_reservation: 512m
+    mem_reservation: 256m
     ports:
       - "8080:8080"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+
+  mysql:
+    image: mysql:latest
+    mem_reservation: 256m
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=review-db
+      - MYSQL_USER=jatinder
+      - MYSQL_PASSWORD=root
+    healthcheck:
+      test: "/usr/bin/mysql --user=user --password=pwd --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 60
+
+  mongodb:
+    image: mongo:latest
+    mem_reservation: 512m
+    ports:
+      - '27017:27017'
+    command:
+      - mongod
+    healthcheck:
+      test: "mongo --eval 'db.stats().ok'"
+      interval: 5s
+      timeout: 2s
+      retries: 60

@@ -4,3 +4,5 @@ spring:
       on-profile: docker
 server:
   port: 7002
+spring.datasource:
+  url: jdbc:mysql://mysql/review-db

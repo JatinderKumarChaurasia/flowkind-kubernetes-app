@@ -1,5 +1,12 @@
-server.port: 7003
-server.error.include-message: always
+server:
+  port: 7003
+  error:
+    include-message: always
+
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: recommendation-db
 
 logging:
   level:
