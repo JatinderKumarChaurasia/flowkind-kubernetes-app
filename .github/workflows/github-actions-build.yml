@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Package
-          path: lib
+          path: microservices/**/lib
       - name: build images using docker-compose
         run: docker-compose build --parallel
       - name: running images
