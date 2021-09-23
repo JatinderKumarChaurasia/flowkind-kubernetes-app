@@ -1,5 +1,7 @@
 name: Flowkind Kubernetes App Build
 on: [push]
+#defaults:
+#  buildtype: development
 env:
   build_type: development
 jobs:
@@ -11,7 +13,7 @@ jobs:
 #        os: [ ubuntu-latest, macos-latest, windows-latest ]
 #    runs-on: ${{ matrix.os }}
     runs-on: ubuntu-latest
-    if: ${{ env.build_type == 'production' }}
+    if: "${{ env.build_type == 'production' }}"
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
