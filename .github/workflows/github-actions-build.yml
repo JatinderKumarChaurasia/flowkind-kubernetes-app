@@ -1,17 +1,15 @@
 name: Flowkind Kubernetes App Build
-on: [push]
-#defaults:
-#  buildtype: development
-env:
-  build_type: development
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - release
 jobs:
   Flowkind-App-Build-Actions:
-    env:
-      build_type: 'development'
-    if: ${{ env.build_type }} == 'production'
-    #    strategy:
-#      matrix:
-#        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
 #    runs-on: ${{ matrix.os }}
     runs-on: ubuntu-latest
     steps:
