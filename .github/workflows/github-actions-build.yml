@@ -9,10 +9,10 @@ jobs:
   Flowkind-App-Build-Actions:
     name: Test on ${{ matrix.os }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        packages: [flowkind-core-product-service,flowkind-core-review-service,flowkind-core-recommendation-service,flowkind-product-composite-service]
+#    strategy:
+#      matrix:
+#        os: [ ubuntu-latest, macos-latest, windows-latest ]
+#        packages: [flowkind-core-product-service,flowkind-core-review-service,flowkind-core-recommendation-service,flowkind-product-composite-service]
 #    runs-on: ${{ matrix.os }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
