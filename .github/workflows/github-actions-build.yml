@@ -5,8 +5,8 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-    runs-on: ${{ matrix.os }}
-#    runs-on: ubuntu-latest
+#    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -21,12 +21,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: setting up jdk 16
+      - name: setting up jdk 17
         uses: actions/setup-java@v2.3.0
         with:
           distribution: 'adopt'
-          java-version: '16'
+          java-version: '17'
           check-latest: true
+      - name: starting docker-compose mysql
+        run: docker-compose up -d mysql
+      - name: starting docker-compose mongodb
+        run: docker-compose up -d mongodb
       - name: build with gradle
         uses: gradle/gradle-build-action@v1.5.1
         with:
