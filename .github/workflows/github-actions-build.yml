@@ -10,8 +10,9 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-#    runs-on: ${{ matrix.os }}
-    runs-on: ubuntu-latest
+        packages: [flowkind-core-product-service,flowkind-core-review-service,flowkind-core-recommendation-service,flowkind-product-composite-service]
+    runs-on: ${{ matrix.os }}
+#    runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -44,8 +45,8 @@ jobs:
       - name: 'Upload artifacts'
         uses: actions/upload-artifact@v2
         with:
-          name: Package
-          path: microservices/**/lib
+          name: ${{ matrix.packages }}
+          path: microservices/${{ matrix.packages }}/lib
       - name: build images using docker-compose
         run: docker-compose build --parallel
       - name: running images
