@@ -34,7 +34,7 @@ jobs:
       - name: build with gradle
         uses: gradle/gradle-build-action@v1.5.1
         with:
-          args: clean build
+          arguments: clean build
           gradle-version: 7.2
       - name: 'Upload artifacts'
         uses: actions/upload-artifact@v2
@@ -59,10 +59,5 @@ jobs:
         run: echo ${{ secrets.MY_GITHUB_SECRET_TOKEN }} | docker login ghcr.io -u jatinderkumarchaurasia --password-stdin
       - name: pushing images into registry
         run: docker-compose push
-#        uses: pennsignals/publish_docker-compose@v0.1.0
-#        with:
-#            version: 'latest'
-#            docker_compose: 'docker-compose.yml'
-#            repo_token: "${{ secrets.GITHUB_TOKEN }}"
 
 
