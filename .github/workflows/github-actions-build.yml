@@ -49,6 +49,8 @@ jobs:
         run: docker-compose ps
       - name: stopping the image
         run: docker-compose down
+      - name: logging into github container registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u jatinderkumarchaurasia --password-stdin
       - name: pushing images into registry
         run: docker-compose push
 #        uses: pennsignals/publish_docker-compose@v0.1.0
