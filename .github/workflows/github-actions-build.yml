@@ -7,12 +7,7 @@ on:
       - release
 jobs:
   Flowkind-App-Build-Actions:
-#    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-#        os: [ ubuntu-latest, windows-latest ]
-        os: [ ubuntu-latest, macos-latest ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -33,15 +28,6 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
           check-latest: true
-      - if: matrix.os == 'macos-latest'
-        name: checking if docker-compose install
-        run: |
-          mkdir -p ~/.docker/machine/cache
-          curl -Lo ~/.docker/machine/cache/boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v19.03.12/boot2docker.iso
-          brew install docker docker-machine docker-compose
-          docker-machine create --driver virtualbox default
-          docker-machine env default
-          docker --version
       - name: starting docker-compose mysql
         run: docker-compose up -d mysql
       - name: starting docker-compose mongodb
@@ -89,5 +75,3 @@ jobs:
         run: echo ${{ secrets.MY_GITHUB_SECRET_TOKEN }} | docker login ghcr.io -u jatinderkumarchaurasia --password-stdin
       - name: pushing images into registry
         run: docker-compose push
-
-
