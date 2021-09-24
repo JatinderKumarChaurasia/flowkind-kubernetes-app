@@ -7,12 +7,12 @@ on:
       - release
 jobs:
   Flowkind-App-Build-Actions:
-    runs-on: macos-latest
-#    strategy:
-#      matrix:
-##        os: [ ubuntu-latest, windows-latest ]
-#        os: [ ubuntu-latest, macos-latest, windows-latest ]
-#    runs-on: ${{ matrix.os }}
+#    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+#        os: [ ubuntu-latest, windows-latest ]
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -33,11 +33,13 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
           check-latest: true
-#      - if: matrix.os == 'macos-latest'
-      - name: checking if docker-compose install
+      - if: matrix.os == 'macos-latest'
+        name: checking if docker-compose install
         run: |
-          brew install --cask docker
+          brew install docker-machine docker docker-compose
+          sudo docker-compose --version
           sudo docker --version
+          sudo systemctl start docker
       - name: starting docker-compose mysql
         run: docker-compose up -d mysql
       - name: starting docker-compose mongodb
