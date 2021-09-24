@@ -39,7 +39,8 @@ jobs:
           brew install docker-machine docker docker-compose
           sudo docker-compose --version
           sudo docker --version
-          sudo systemctl start docker
+#          sudo systemctl start docker
+          brew services start docker-machine
       - name: starting docker-compose mysql
         run: docker-compose up -d mysql
       - name: starting docker-compose mongodb
