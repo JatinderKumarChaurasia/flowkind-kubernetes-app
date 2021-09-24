@@ -36,7 +36,7 @@ jobs:
       - if: matrix.os == 'macos-latest'
         name: checking if docker-compose install
         run: |
-          brew install docker-machine docker docker-compose
+          brew install --cask docker
           sudo docker --version
       - name: starting docker-compose mysql
         run: docker-compose up -d mysql
