@@ -1,8 +1,16 @@
+server:
+  port: 7002
 spring:
   config:
     activate:
       on-profile: docker
-server:
-  port: 7002
-spring.datasource:
-  url: jdbc:mysql://mysql/review-db
+  datasource:
+    url: jdbc:mysql://mysql/review-db
+  rabbitmq:
+    host: rabbitmq
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+

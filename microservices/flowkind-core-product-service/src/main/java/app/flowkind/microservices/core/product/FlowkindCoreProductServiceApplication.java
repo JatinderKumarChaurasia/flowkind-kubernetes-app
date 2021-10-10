@@ -11,10 +11,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mapping.context.MappingContext;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.index.IndexResolver;
 import org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexResolver;
+import org.springframework.data.mongodb.core.index.ReactiveIndexOperations;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 
@@ -23,9 +23,9 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 public class FlowkindCoreProductServiceApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlowkindCoreProductServiceApplication.class);
+
     @Autowired
-    private MongoOperations mongoOperations;
-    // this is application
+    private ReactiveMongoOperations mongoOperations;
     public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(FlowkindCoreProductServiceApplication.class, args);
         String mongoDBHost=configurableApplicationContext.getEnvironment().getProperty("spring.data.mongodb.host");
@@ -37,7 +37,7 @@ public class FlowkindCoreProductServiceApplication {
     public void initIndicesAfterStartup() {
         MappingContext<? extends MongoPersistentEntity<?>, MongoPersistentProperty> mappingContext = mongoOperations.getConverter().getMappingContext();
         IndexResolver resolver = new MongoPersistentEntityIndexResolver(mappingContext);
-        IndexOperations indexOps = mongoOperations.indexOps(ProductEntity.class);
+        ReactiveIndexOperations indexOps = mongoOperations.indexOps(ProductEntity.class);
         resolver.resolveIndexFor(ProductEntity.class).forEach(indexOps::ensureIndex);
     }
 }

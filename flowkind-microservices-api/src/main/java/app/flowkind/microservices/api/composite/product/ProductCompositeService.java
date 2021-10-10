@@ -4,7 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 @Tag(name = "ProductCompositeService", description = "REST API for composite product information.")
 public interface ProductCompositeService {
@@ -12,7 +14,7 @@ public interface ProductCompositeService {
     /**
      * Sample usage: "curl $HOST:$PORT/product-composite/1".
      *
-     * @param productID Id of the product
+     * @param productID ID of the product
      * @return the composite product info, if found, else null
      */
     @Operation(
@@ -26,7 +28,7 @@ public interface ProductCompositeService {
             @ApiResponse(responseCode = "422",description = "${api.responseCodes.unprocessableEntity.description}")
     })
     @GetMapping(value = "/product-composite/{productID}",produces = "application/json")
-    ProductAggregate getProduct(@PathVariable int productID);
+    Mono<ProductAggregate> getProduct(@PathVariable int productID);
 
     /**
      * Sample usage, see below.
@@ -35,7 +37,7 @@ public interface ProductCompositeService {
      *   -H "Content-Type: application/json" --data \
      *   '{"productID":123,"name":"product 123","weight":123}'
      *
-     * @param body A JSON representation of the new composite product
+     * @param productAggregate A JSON representation of the new composite product
      */
     @Operation(
             summary = "${api.product-composite.create-composite-product.description}",
@@ -44,15 +46,16 @@ public interface ProductCompositeService {
             @ApiResponse(responseCode = "400", description = "${api.responseCodes.badRequest.description}"),
             @ApiResponse(responseCode = "422", description = "${api.responseCodes.unprocessableEntity.description}")
     })
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @PostMapping(
             value    = "/product-composite",
             consumes = "application/json")
-    void createProduct(@RequestBody ProductAggregate productAggregate);
+    Mono<Void> createProduct(@RequestBody ProductAggregate productAggregate);
 
     /**
      * Sample usage: "curl -X DELETE $HOST:$PORT/product-composite/1".
      *
-     * @param productID Id of the product
+     * @param productID ID of the product
      */
     @Operation(
             summary = "${api.product-composite.delete-composite-product.description}",
@@ -61,6 +64,7 @@ public interface ProductCompositeService {
             @ApiResponse(responseCode = "400", description = "${api.responseCodes.badRequest.description}"),
             @ApiResponse(responseCode = "422", description = "${api.responseCodes.unprocessableEntity.description}")
     })
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "/product-composite/{productID}")
-    void deleteProduct(@PathVariable int productID);
+    Mono<Void> deleteProduct(@PathVariable int productID);
 }

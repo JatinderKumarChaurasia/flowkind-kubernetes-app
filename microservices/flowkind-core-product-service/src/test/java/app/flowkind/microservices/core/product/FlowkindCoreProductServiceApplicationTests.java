@@ -1,62 +1,81 @@
 package app.flowkind.microservices.core.product;
 
+import app.flowkind.microservices.api.event.Event;
 import app.flowkind.microservices.api.core.product.Product;
+import app.flowkind.microservices.api.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
 import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.function.Consumer;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static reactor.core.publisher.Mono.just;
 
 @TestInstance(value = TestInstance.Lifecycle.PER_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FlowkindCoreProductServiceApplicationTests extends MongoDbTestBase{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlowkindCoreProductServiceApplicationTests.class);
     @Autowired
     private WebTestClient webTestClient;
+
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    @Qualifier("messageProcessor")
+    private Consumer<Event<Integer,Product>> messageProcessor;
+
     @BeforeEach
     void setUpDatabase() {
-        productRepository.deleteAll();
+        productRepository.deleteAll().block();
     }
 
     @AfterEach
     void cleanUpTestResult() {
-        productRepository.deleteAll();
+        productRepository.deleteAll().block();
     }
 
     @Test
     void getProductById() {
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        assertTrue(productRepository.findByProductID(productID).isPresent());
+        assertNull(productRepository.findByProductID(productID).block());
+        assertEquals (0,(long) productRepository.count().block());
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        assertEquals (1,(long) productRepository.count().block());
         getAndVerifyProduct(productID, HttpStatus.OK).jsonPath("$.productID").isEqualTo(productID);
     }
 
     @Test
     void duplicateError() {
+        LOGGER.info("Checking Duplicate Error");
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        assertTrue(productRepository.findByProductID(productID).isPresent());
-        postAndVerifyProduct(productID, HttpStatus.UNPROCESSABLE_ENTITY).jsonPath("$.path").isEqualTo("/product")
-                .jsonPath("$.message").isEqualTo("Duplicate key, Product Id: " + productID);
+        assertNull(productRepository.findByProductID(productID).block());
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        InvalidInputException invalidInputException = assertThrows(InvalidInputException.class,()->
+            sendCreateProductEvent(productID),"expected a InvalidInputException exception!"
+        );
+        assertEquals("Duplicate key, Product Id: " + productID,invalidInputException.getMessage());
     }
 
     @Test
     void deleteProduct() {
         int productID = 1;
-        postAndVerifyProduct(productID, HttpStatus.OK);
-        assertTrue(productRepository.findByProductID(productID).isPresent());
-        deleteAndVerifyProduct(productID, HttpStatus.OK);
-        assertFalse(productRepository.findByProductID(productID).isPresent());
-        deleteAndVerifyProduct(productID, HttpStatus.OK);
+        sendCreateProductEvent(productID);
+        assertNotNull(productRepository.findByProductID(productID).block());
+        sendDeleteProductEvent(productID);
+        assertNull(productRepository.findByProductID(productID).block());
+        sendDeleteProductEvent(productID);
     }
 
     @Test
@@ -109,5 +128,16 @@ class FlowkindCoreProductServiceApplicationTests extends MongoDbTestBase{
                 .exchange()
                 .expectStatus().isEqualTo(expectedHTTPStatus)
                 .expectBody();
+    }
+
+    private void sendCreateProductEvent(int productID) {
+        Product product = new Product(productID,"Name "+productID,productID,"SA");
+        Event<Integer,Product> productEvent = new Event<>(Event.Type.CREATE,productID,product);
+        messageProcessor.accept(productEvent);
+    }
+
+    private void sendDeleteProductEvent(int productID) {
+        Event<Integer,Product> productEvent = new Event<>(Event.Type.DELETE,productID,null);
+        messageProcessor.accept(productEvent);
     }
 }

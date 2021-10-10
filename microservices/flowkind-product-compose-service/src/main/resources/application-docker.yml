@@ -2,6 +2,13 @@ spring:
   config:
     activate:
       on-profile: docker
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: kafka
+  rabbitmq:
+    host: rabbitmq
 server:
   port: 8080
 

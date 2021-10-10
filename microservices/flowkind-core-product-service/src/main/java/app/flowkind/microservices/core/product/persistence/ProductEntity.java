@@ -15,7 +15,9 @@ public class ProductEntity {
 
     @Version
     private  Integer version;
-    @Indexed(unique = true) private int productID;
+    @Indexed(unique = true)
+    private int productID;
+
     private String name;
     private int weight;
     public ProductEntity(int productID, String name, int weight) {
@@ -62,5 +64,10 @@ public class ProductEntity {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("ProductEntity: %s:%s", productID,id);
     }
 }

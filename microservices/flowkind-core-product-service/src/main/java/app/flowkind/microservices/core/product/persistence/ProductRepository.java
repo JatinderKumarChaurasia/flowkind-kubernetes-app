@@ -1,9 +1,8 @@
 package app.flowkind.microservices.core.product.persistence;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
-public interface ProductRepository extends PagingAndSortingRepository<ProductEntity,String> {
-    Optional<ProductEntity> findByProductID(int productID);
+public interface ProductRepository extends ReactiveCrudRepository<ProductEntity,String> {
+    Mono<ProductEntity> findByProductID(int productID);
 }

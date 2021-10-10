@@ -1,5 +1,6 @@
 server.port: 7002
 server.error.include-message: always
+myip: "13.78.214.64"
 spring:
   jpa:
     hibernate:
@@ -7,9 +8,45 @@ spring:
   datasource:
     username: jatinder
     password: root
-    url: jdbc:mysql://localhost/review-db
+    url: jdbc:mysql://13.78.214.64/review-db
     hikari:
       initialization-fail-timeout: 60000
+  cloud:
+    function:
+      definition: messageProcessor
+    stream:
+      default-binder: rabbit
+      default.contentType: application/json
+      bindings:
+        messageProcessor-in-0:
+          destination: reviews
+          group: reviewsGroup
+          prefix: flowkind
+          consumer:
+            maxAttempts: 3
+            backOffInitialInterval: 500
+            backOffMaxInterval: 1000
+            backOffMultiplier: 2.0
+      rabbit:
+        bindings:
+          messageProcessor-in-0:
+            consumer:
+              autoBindDlq: true
+              republishToDlq: true
+              receive-timeout: 200
+      kafka:
+        binder:
+          brokers: ${myip}
+          defaultBrokerPort: 9092
+        bindings:
+          messageProcessor-in-0:
+            consumer:
+              enableDlq: true
+  rabbitmq:
+    host: ${myip}
+    port: 5672
+    username: guest
+    password: guest
 
 logging:
   level:
@@ -17,3 +54,12 @@ logging:
     app.flowkind: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

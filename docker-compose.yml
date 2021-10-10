@@ -11,6 +11,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
       - mongodb
+      - rabbitmq
 
   recommendation:
     build: microservices/flowkind-core-recommendation-service
@@ -22,6 +23,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
       - mongodb
+      - rabbitmq
 
   review:
     build: microservices/flowkind-core-review-service
@@ -33,6 +35,7 @@ services:
       - "SPRING_PROFILES_ACTIVE=docker"
     depends_on:
       - mysql
+      - rabbitmq
     command: ["./wait-for-it.sh"]
 
   product-composite:
@@ -45,6 +48,8 @@ services:
       - "8080:8080"
     environment:
       - "SPRING_PROFILES_ACTIVE=docker"
+    depends_on:
+      - rabbitmq
 
   mysql:
     image: mysql:latest
@@ -72,6 +77,18 @@ services:
       - mongod
     healthcheck:
       test: "mongo --eval 'db.stats().ok'"
+      interval: 5s
+      timeout: 2s
+      retries: 60
+
+  rabbitmq:
+    image: rabbitmq:management
+    mem_reservation: 512m
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
       interval: 5s
       timeout: 2s
       retries: 60

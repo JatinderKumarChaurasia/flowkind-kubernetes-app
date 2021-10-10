@@ -6,7 +6,7 @@ import org.testcontainers.containers.MySQLContainer;
 
 abstract class MySqlTestBase {
 
-    private static MySQLContainer mySQLContainer = new MySQLContainer("mysql:5.7");
+    private static MySQLContainer mySQLContainer = new MySQLContainer("mysql:latest");
     static {
         mySQLContainer.start();
     }

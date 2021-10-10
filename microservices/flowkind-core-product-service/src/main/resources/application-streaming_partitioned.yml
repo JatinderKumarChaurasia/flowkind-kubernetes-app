@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: streaming_partitioned
+  cloud:
+    stream:
+      bindings:
+        messageProcessor-in-0:
+          consumer:
+            partitioned: true
+            instanceCount: 2

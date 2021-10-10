@@ -34,9 +34,4 @@ class MapperTests {
         assertEquals(product.getWeight(),product1.getWeight());
         assertNull(product1.getServiceAddress());
     }
-
-    void mapperListTests() {
-
-    }
-
 }

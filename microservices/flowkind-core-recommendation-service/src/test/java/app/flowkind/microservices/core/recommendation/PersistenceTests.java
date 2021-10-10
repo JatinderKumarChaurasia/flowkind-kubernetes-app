@@ -24,39 +24,42 @@ class PersistenceTests {
 
     @BeforeEach
     void setupDb() {
-        recommendationRepository.deleteAll();
+        recommendationRepository.deleteAll().block();
         RecommendationEntity recommendationEntity = new RecommendationEntity(1, 2, "a", 3, "c");
-        savedEntity = recommendationRepository.save(recommendationEntity);
+        savedEntity = recommendationRepository.save(recommendationEntity).block();
+        assert savedEntity != null;
         assertEqualsRecommendation(recommendationEntity, savedEntity);
     }
 
     @Test
     void create() {
         RecommendationEntity recommendationEntity = new RecommendationEntity(1, 3, "a", 3, "c");
-        recommendationRepository.save(recommendationEntity);
-        RecommendationEntity foundEntity = recommendationRepository.findById(recommendationEntity.getId()).orElseThrow();
+        recommendationRepository.save(recommendationEntity).block();
+        RecommendationEntity foundEntity = recommendationRepository.findById(recommendationEntity.getId()).block();
+        assert foundEntity != null;
         assertEqualsRecommendation(recommendationEntity, foundEntity);
-        assertEquals(2, recommendationRepository.count());
+        assertEquals(2, recommendationRepository.count().block());
     }
 
     @Test
     void update() {
         savedEntity.setAuthor("a2");
-        recommendationRepository.save(savedEntity);
-        RecommendationEntity foundEntity = recommendationRepository.findById(savedEntity.getId()).orElseThrow();
+        recommendationRepository.save(savedEntity).block();
+        RecommendationEntity foundEntity = recommendationRepository.findById(savedEntity.getId()).block();
+        assert foundEntity != null;
         assertEquals(1, (long)foundEntity.getVersion());
         assertEquals("a2", foundEntity.getAuthor());
     }
 
     @Test
     void delete() {
-        recommendationRepository.delete(savedEntity);
-        assertFalse(recommendationRepository.existsById(savedEntity.getId()));
+        recommendationRepository.delete(savedEntity).block();
+        assertNotEquals(Boolean.TRUE, recommendationRepository.existsById(savedEntity.getId()).block());
     }
 
     @Test
     void getByProductId() {
-        List<RecommendationEntity> recommendationEntities = recommendationRepository.findByProductID(savedEntity.getProductID());
+        List<RecommendationEntity> recommendationEntities = recommendationRepository.findByProductID(savedEntity.getProductID()).collectList().block();
         assertThat(recommendationEntities, hasSize(1));
         assertEqualsRecommendation(savedEntity, recommendationEntities.get(0));
     }
@@ -65,21 +68,23 @@ class PersistenceTests {
     void duplicateError() {
         assertThrows(DuplicateKeyException.class, () -> {
             RecommendationEntity recommendationEntity = new RecommendationEntity(1, 2, "a", 3, "c");
-            recommendationRepository.save(recommendationEntity);
+            recommendationRepository.save(recommendationEntity).block();
         });
     }
 
     @Test
     void optimisticLockError() {
-        RecommendationEntity recommendationEntity1 = recommendationRepository.findById(savedEntity.getId()).orElseThrow();
-        RecommendationEntity recommendationEntity2 = recommendationRepository.findById(savedEntity.getId()).orElseThrow();
+        RecommendationEntity recommendationEntity1 = recommendationRepository.findById(savedEntity.getId()).block();
+        RecommendationEntity recommendationEntity2 = recommendationRepository.findById(savedEntity.getId()).block();
+        assert recommendationEntity1 != null && recommendationEntity2 != null;
         recommendationEntity1.setAuthor("a1");
-        recommendationRepository.save(recommendationEntity1);
+        recommendationRepository.save(recommendationEntity1).block();
         assertThrows(OptimisticLockingFailureException.class, () -> {
             recommendationEntity2.setAuthor("a2");
-            recommendationRepository.save(recommendationEntity2);
+            recommendationRepository.save(recommendationEntity2).block();
         });
-        RecommendationEntity updatedEntity = recommendationRepository.findById(savedEntity.getId()).orElseThrow();
+        RecommendationEntity updatedEntity = recommendationRepository.findById(savedEntity.getId()).block();
+        assert updatedEntity != null;
         assertEquals(1, (int)updatedEntity.getVersion());
         assertEquals("a1", updatedEntity.getAuthor());
     }

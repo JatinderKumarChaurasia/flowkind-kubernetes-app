@@ -1,4 +1,6 @@
 
+[![Flowkind Kubernetes App Build](https://github.com/JatinderKumarChaurasia/flowkind-kubernetes-app/actions/workflows/github-actions-build.yml/badge.svg)](https://github.com/JatinderKumarChaurasia/flowkind-kubernetes-app/actions/workflows/github-actions-build.yml)
+
 ###### Product Composite Link
     http://localhost:8080/product-composite/1
 

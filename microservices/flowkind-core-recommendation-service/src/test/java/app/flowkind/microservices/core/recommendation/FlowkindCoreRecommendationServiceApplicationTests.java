@@ -1,17 +1,22 @@
 package app.flowkind.microservices.core.recommendation;
 
 import app.flowkind.microservices.api.core.recommendation.Recommendation;
+import app.flowkind.microservices.api.event.Event;
+import app.flowkind.microservices.api.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.recommendation.persistence.RecommendationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.function.Consumer;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static reactor.core.publisher.Mono.just;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
@@ -22,19 +27,23 @@ class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
     @Autowired
     private RecommendationRepository recommendationRepository;
 
+    @Autowired
+    @Qualifier("messageProcessor")
+    private Consumer<Event<Integer,Recommendation>> messageProcessor;
+
     @BeforeEach
     void setupDb() {
-        recommendationRepository.deleteAll();
+        recommendationRepository.deleteAll().block();
     }
 
     @Test
     void getRecommendationsByProductID() {
         int productID=1;
-        postAndVerifyRecommendation(productID, 1, HttpStatus.OK);
-        postAndVerifyRecommendation(productID, 2, HttpStatus.OK);
-        postAndVerifyRecommendation(productID, 3, HttpStatus.OK);
+        sendCreateRecommendationEvent(productID,1);
+        sendCreateRecommendationEvent(productID,2);
+        sendCreateRecommendationEvent(productID,3);
 
-        assertEquals(3, recommendationRepository.findByProductID(productID).size());
+        assertEquals(3, recommendationRepository.findByProductID(productID).count().block());
         getAndVerifyRecommendationsByProductID(productID, HttpStatus.OK)
                 .jsonPath("$.length()").isEqualTo(3)
                 .jsonPath("$[2].productID").isEqualTo(productID)
@@ -45,25 +54,22 @@ class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
     void duplicateError() {
         int productID = 1;
         int recommendationID = 1;
-        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.OK)
-                .jsonPath("$.productID").isEqualTo(productID)
-                .jsonPath("$.recommendationID").isEqualTo(recommendationID);
-        assertEquals(1, recommendationRepository.count());
-        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.UNPROCESSABLE_ENTITY)
-                .jsonPath("$.path").isEqualTo("/recommendation")
-                .jsonPath("$.message").isEqualTo("Duplicate key, Product Id: 1, Recommendation Id:1");
-        assertEquals(1, recommendationRepository.count());
+        sendCreateRecommendationEvent(productID,recommendationID);
+        assertEquals(1, recommendationRepository.count().block());
+        InvalidInputException invalidInputException = assertThrows(InvalidInputException.class,() -> sendCreateRecommendationEvent(productID,recommendationID),"Expected a InvalidInputException here!");
+        assertEquals("Duplicate key, Product Id: 1, Recommendation Id:1", invalidInputException.getMessage());
+        assertEquals(1, recommendationRepository.count().block());
     }
 
     @Test
     void deleteRecommendations() {
         int productID = 1;
         int recommendationID = 1;
-        postAndVerifyRecommendation(productID, recommendationID, HttpStatus.OK);
-        assertEquals(1, recommendationRepository.findByProductID(productID).size());
-        deleteAndVerifyRecommendationsByProductId(productID, HttpStatus.OK);
-        assertEquals(0, recommendationRepository.findByProductID(productID).size());
-        deleteAndVerifyRecommendationsByProductId(productID, HttpStatus.OK);
+        sendCreateRecommendationEvent(productID,recommendationID);
+        assertEquals(1, recommendationRepository.findByProductID(productID).count().block());
+        sendDeleteRecommendationEvent(productID);
+        assertEquals(0, recommendationRepository.findByProductID(productID).count().block());
+        sendDeleteRecommendationEvent(productID);
     }
 
     @Test
@@ -110,24 +116,14 @@ class FlowkindCoreRecommendationServiceApplicationTests extends MongoDbTestBase{
                 .expectBody();
     }
 
-    private WebTestClient.BodyContentSpec postAndVerifyRecommendation(int productID, int recommendationID, HttpStatus expectedStatus) {
+    private void sendCreateRecommendationEvent(int productID,int recommendationID) {
         Recommendation recommendation = new Recommendation(productID, recommendationID, "Author " + recommendationID, recommendationID, "Content " + recommendationID, "SA");
-        return webTestClient.post()
-                .uri("/recommendation")
-                .body(just(recommendation), Recommendation.class)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(expectedStatus)
-                .expectHeader().contentType(MediaType.APPLICATION_JSON)
-                .expectBody();
+        Event<Integer,Recommendation> recommendationEvent = new Event<>(Event.Type.CREATE,productID,recommendation);
+        messageProcessor.accept(recommendationEvent);
     }
 
-    private WebTestClient.BodyContentSpec deleteAndVerifyRecommendationsByProductId(int productID, HttpStatus expectedStatus) {
-        return webTestClient.delete()
-                .uri("/recommendation?productID=" + productID)
-                .accept(MediaType.APPLICATION_JSON)
-                .exchange()
-                .expectStatus().isEqualTo(expectedStatus)
-                .expectBody();
+    private void sendDeleteRecommendationEvent(int productID) {
+        Event<Integer,Recommendation> recommendationEvent = new Event<>(Event.Type.DELETE,productID,null);
+        messageProcessor.accept(recommendationEvent);
     }
 }

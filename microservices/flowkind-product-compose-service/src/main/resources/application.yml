@@ -6,7 +6,7 @@ springdoc:
     path: /openapi/swagger-ui.html
   packages-to-scan: app.flowkind.microservices.compose.product
   paths-to-match: /**
-
+myip: "13.78.214.64"
 api:
   common:
     version: 1.0.0
@@ -82,3 +82,42 @@ flowkind-app:
   flowkind-core-recommendation-service:
     host: localhost
     port: 7003
+
+spring:
+  cloud:
+    stream:
+      default-binder: rabbit
+      default.contentType: application/json
+      bindings:
+        products-out-0:
+          destination: products
+          producer:
+            required-groups: auditGroup
+        recommendations-out-0:
+          destination: recommendations
+          producer:
+            required-groups: auditGroup
+        reviews-out-0:
+          destination: reviews
+          producer:
+            required-groups: auditGroup
+
+      kafka:
+        binder:
+          brokers: ${myip}
+          defaultBrokerPort: 9092
+
+  rabbitmq:
+    host: ${myip}
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
