@@ -32,6 +32,8 @@ jobs:
         run: docker-compose up -d mysql
       - name: starting docker-compose mongodb
         run: docker-compose up -d mongodb
+      - name: starting docker-compose rabbitmq
+        run: docker-compose up -d rabbitmq
       - name: build with gradle
         uses: gradle/gradle-build-action@v1.5.1
         with:
