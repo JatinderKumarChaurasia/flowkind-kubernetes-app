@@ -6,7 +6,8 @@ springdoc:
     path: /openapi/swagger-ui.html
   packages-to-scan: app.flowkind.microservices.compose.product
   paths-to-match: /**
-myip: "13.78.214.64"
+myip: "flowkind.eastus2.cloudapp.azure.com"
+
 api:
   common:
     version: 1.0.0
@@ -91,14 +92,17 @@ spring:
       bindings:
         products-out-0:
           destination: products
+          group: productsGroup
           producer:
             required-groups: auditGroup
         recommendations-out-0:
           destination: recommendations
+          group: recommendationsGroup
           producer:
             required-groups: auditGroup
         reviews-out-0:
           destination: reviews
+          group: reviewsGroup
           producer:
             required-groups: auditGroup
 

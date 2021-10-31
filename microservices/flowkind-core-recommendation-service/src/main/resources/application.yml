@@ -3,7 +3,7 @@ server:
   error:
     include-message: always
 
-myip: "13.78.214.64"
+myip: "flowkind.eastus2.cloudapp.azure.com"
 
 spring:
   data:

@@ -17,7 +17,7 @@ services:
     build: microservices/flowkind-core-product-service
     image: ghcr.io/jatinderkumarchaurasia/flowkind/product-service
     #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/product-service
-    container_name: product-service
+    container_name: product-service-p1
     mem_reservation: 256m
     environment:
       - "SPRING_PROFILES_ACTIVE=docker,streaming_partitioned,streaming_instance_1"
@@ -42,7 +42,7 @@ services:
     build: microservices/flowkind-core-recommendation-service
     image: ghcr.io/jatinderkumarchaurasia/flowkind/recommendation-service
     #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/recommendation-service
-    container_name: recommendation-service
+    container_name: recommendation-service-p1
     mem_reservation: 256m
     environment:
       - "SPRING_PROFILES_ACTIVE=docker,streaming_partitioned,streaming_instance_1"
@@ -67,7 +67,7 @@ services:
     build: microservices/flowkind-core-review-service
     image: ghcr.io/jatinderkumarchaurasia/flowkind/review-service
     #    image: registry.gitlab.com/jatinderkumarchaurasia/flowkind/review-service
-    container_name: review-service
+    container_name: review-service-p1
     mem_reservation: 256m
     environment:
       - "SPRING_PROFILES_ACTIVE=docker,streaming_partitioned,streaming_instance_1"
@@ -120,11 +120,11 @@ services:
       retries: 60
 
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:management
     mem_reservation: 512m
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     healthcheck:
       test: [ "CMD", "rabbitmqctl", "status" ]
       interval: 5s

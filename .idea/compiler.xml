@@ -24,4 +24,11 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="17" />
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="flowkind-kubernetes-app.flowkind-microservices-api.main" options="--add-modules java.base" />
+      <module name="flowkind-kubernetes-app.microservices.flowkind-core-product-service.main" options="--add-modules java.logging,java.base" />
+      <module name="flowkind-kubernetes-app.microservices.flowkind-core-product-service.test" options="--add-modules java.base" />
+    </option>
+  </component>
 </project>

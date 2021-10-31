@@ -1,10 +1,13 @@
 package app.flowkind.microservices.core.product;
 
-import app.flowkind.microservices.api.event.Event;
 import app.flowkind.microservices.api.core.product.Product;
+import app.flowkind.microservices.api.event.Event;
 import app.flowkind.microservices.api.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
