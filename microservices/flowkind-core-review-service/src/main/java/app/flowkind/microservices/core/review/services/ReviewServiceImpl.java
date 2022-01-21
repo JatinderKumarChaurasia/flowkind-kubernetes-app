@@ -2,7 +2,7 @@ package app.flowkind.microservices.core.review.services;
 
 import app.flowkind.microservices.api.core.review.Review;
 import app.flowkind.microservices.api.core.review.ReviewService;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.review.persistence.ReviewEntity;
 import app.flowkind.microservices.core.review.persistence.ReviewRepository;
 import app.flowkind.microservices.utils.http.ServiceUtil;
@@ -16,7 +16,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 

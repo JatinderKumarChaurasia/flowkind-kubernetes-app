@@ -1,8 +1,8 @@
 package app.flowkind.microservices.utils.http;
 
-import app.flowkind.microservices.api.exceptions.BadRequestException;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
-import app.flowkind.microservices.api.exceptions.NotFoundException;
+import app.flowkind.microservices.utils.exceptions.BadRequestException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

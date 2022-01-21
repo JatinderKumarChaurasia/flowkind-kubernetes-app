@@ -2,7 +2,7 @@ package app.flowkind.microservices.core.product;
 
 import app.flowkind.microservices.api.core.product.Product;
 import app.flowkind.microservices.api.event.Event;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

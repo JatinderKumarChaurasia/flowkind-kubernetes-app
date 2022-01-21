@@ -51,11 +51,19 @@ services:
     depends_on:
       - rabbitmq
 
+  eureka:
+    build: spring-cloud/flowkind-eureka-server
+    image: ghcr.io/jatinderkumarchaurasia/flowkind/flowkind-eureka-server
+    container_name: flowkind-eureka-server
+    mem_reservation: 256m
+    ports:
+      - "8761:8761"
+
   mysql:
     image: mysql:latest
     platform: linux/amd64
     container_name: mysql_flowkind
-    mem_reservation: 256m
+    mem_reservation: 512m
     ports:
       - '3306:3306'
     environment:

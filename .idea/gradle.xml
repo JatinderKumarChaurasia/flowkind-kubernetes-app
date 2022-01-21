@@ -19,6 +19,17 @@
             <option value="$PROJECT_DIR$/microservices/flowkind-core-recommendation-service" />
             <option value="$PROJECT_DIR$/microservices/flowkind-core-review-service" />
             <option value="$PROJECT_DIR$/microservices/flowkind-product-compose-service" />
+            <option value="$PROJECT_DIR$/spring-cloud" />
+            <option value="$PROJECT_DIR$/spring-cloud/flowkind-eureka-server" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/spring-cloud/flowkind-eureka-server" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/spring-cloud/flowkind-eureka-server" />
           </set>
         </option>
       </GradleProjectSettings>

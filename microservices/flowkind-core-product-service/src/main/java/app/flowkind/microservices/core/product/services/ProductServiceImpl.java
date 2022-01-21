@@ -2,8 +2,8 @@ package app.flowkind.microservices.core.product.services;
 
 import app.flowkind.microservices.api.core.product.Product;
 import app.flowkind.microservices.api.core.product.ProductService;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
-import app.flowkind.microservices.api.exceptions.NotFoundException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.NotFoundException;
 import app.flowkind.microservices.core.product.persistence.ProductEntity;
 import app.flowkind.microservices.core.product.persistence.ProductRepository;
 import app.flowkind.microservices.utils.http.ServiceUtil;

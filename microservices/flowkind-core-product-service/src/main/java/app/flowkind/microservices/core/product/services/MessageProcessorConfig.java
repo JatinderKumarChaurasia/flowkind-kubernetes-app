@@ -3,7 +3,7 @@ package app.flowkind.microservices.core.product.services;
 import app.flowkind.microservices.api.event.Event;
 import app.flowkind.microservices.api.core.product.Product;
 import app.flowkind.microservices.api.core.product.ProductService;
-import app.flowkind.microservices.api.exceptions.EventProcessingException;
+import app.flowkind.microservices.utils.exceptions.EventProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

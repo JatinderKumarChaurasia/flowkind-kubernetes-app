@@ -1,13 +1,10 @@
 package app.flowkind.microservices.compose.product;
 
-import app.flowkind.microservices.api.composite.product.ProductAggregate;
-import app.flowkind.microservices.api.composite.product.RecommendationSummary;
-import app.flowkind.microservices.api.composite.product.ReviewSummary;
 import app.flowkind.microservices.api.core.product.Product;
 import app.flowkind.microservices.api.core.recommendation.Recommendation;
 import app.flowkind.microservices.api.core.review.Review;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
-import app.flowkind.microservices.api.exceptions.NotFoundException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.NotFoundException;
 import app.flowkind.microservices.compose.product.services.ProductCompositeIntegration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +17,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.when;
-import static reactor.core.publisher.Mono.just;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FlowkindProductComposeServiceApplicationTests {

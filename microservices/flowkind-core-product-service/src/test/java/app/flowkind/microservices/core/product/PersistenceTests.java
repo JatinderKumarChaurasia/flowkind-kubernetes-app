@@ -11,8 +11,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 @DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
 class PersistenceTests {
 

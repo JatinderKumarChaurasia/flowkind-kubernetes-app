@@ -2,7 +2,7 @@ package app.flowkind.microservices.core.recommendation;
 
 import app.flowkind.microservices.api.core.recommendation.Recommendation;
 import app.flowkind.microservices.api.event.Event;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.recommendation.persistence.RecommendationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

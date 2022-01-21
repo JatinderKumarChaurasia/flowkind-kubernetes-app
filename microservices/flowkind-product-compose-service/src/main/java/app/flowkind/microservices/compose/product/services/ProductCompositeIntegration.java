@@ -7,8 +7,8 @@ import app.flowkind.microservices.api.core.recommendation.RecommendationService;
 import app.flowkind.microservices.api.core.review.Review;
 import app.flowkind.microservices.api.core.review.ReviewService;
 import app.flowkind.microservices.api.event.Event;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
-import app.flowkind.microservices.api.exceptions.NotFoundException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.NotFoundException;
 import app.flowkind.microservices.utils.http.HttpErrorInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -17,13 +17,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.cloud.stream.function.StreamBridge;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
@@ -31,8 +28,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 
 import static reactor.core.publisher.Flux.empty;
@@ -46,29 +41,32 @@ public class ProductCompositeIntegration implements ProductService, ReviewServic
     private final StreamBridge streamBridge;
     private final Scheduler publishEventScheduler;
 
+    private final String productServiceURL = "http://product";
+    private final String recommendationServiceURL = "http://recommendation";
+    private final String reviewServiceURL = "http://review";
     // urls
-    private final String productServiceURL;
-    private final String reviewServiceURL;
-    private final String recommendationServiceURL;
+//    private final String productServiceURL;
+//    private final String reviewServiceURL;
+//    private final String recommendationServiceURL;
 
     public ProductCompositeIntegration(
             @Qualifier("publishEventScheduler") Scheduler publishEventScheduler,
             WebClient.Builder webclient,
             ObjectMapper objectMapper,
-            StreamBridge streamBridge,
-            @Value("${flowkind-app.flowkind-core-product-service.host}") String productServiceHost,
-            @Value("${flowkind-app.flowkind-core-product-service.port}") String productServicePort,
-            @Value("${flowkind-app.flowkind-core-review-service.host}") String reviewServiceHost,
-            @Value("${flowkind-app.flowkind-core-review-service.port}") String reviewServicePort,
-            @Value("${flowkind-app.flowkind-core-recommendation-service.host}") String recommendationServiceHost,
-            @Value("${flowkind-app.flowkind-core-recommendation-service.port}") String recommendationServicePort) {
+            StreamBridge streamBridge) {
+//            @Value("${flowkind-app.flowkind-core-product-service.host}") String productServiceHost,
+//            @Value("${flowkind-app.flowkind-core-product-service.port}") String productServicePort,
+//            @Value("${flowkind-app.flowkind-core-review-service.host}") String reviewServiceHost,
+//            @Value("${flowkind-app.flowkind-core-review-service.port}") String reviewServicePort,
+//            @Value("${flowkind-app.flowkind-core-recommendation-service.host}") String recommendationServiceHost,
+//            @Value("${flowkind-app.flowkind-core-recommendation-service.port}") String recommendationServicePort) {
         this.publishEventScheduler = publishEventScheduler;
         this.webClient = webclient.build();
         this.objectMapper = objectMapper;
         this.streamBridge = streamBridge;
-        this.productServiceURL = "http://" + productServiceHost + ":" + productServicePort + "/product";
-        this.reviewServiceURL = "http://" + reviewServiceHost + ":" + reviewServicePort + "/review";
-        this.recommendationServiceURL = "http://" + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation";
+//        this.productServiceURL = "http://" + productServiceHost + ":" + productServicePort + "/product";
+//        this.reviewServiceURL = "http://" + reviewServiceHost + ":" + reviewServicePort + "/review";
+//        this.recommendationServiceURL = "http://" + recommendationServiceHost + ":" + recommendationServicePort + "/recommendation";
     }
 
     private String getErrorMessage(HttpClientErrorException ex) {
@@ -81,7 +79,7 @@ public class ProductCompositeIntegration implements ProductService, ReviewServic
 
     @Override
     public Mono<Product> getProduct(int productID) {
-        String url = productServiceURL+"/" + productID;
+        String url = productServiceURL+"/product/" + productID;
         LOGGER.debug("Will call getProduct API on URL: {}", url);
         return webClient.get().uri(url).retrieve().bodyToMono(Product.class).log(LOGGER.getName(), Level.FINE).onErrorMap(WebClientResponseException.class, this::handleExceptions);
     }
@@ -102,7 +100,7 @@ public class ProductCompositeIntegration implements ProductService, ReviewServic
 
     @Override
     public Flux<Recommendation> getRecommendations(int productID) {
-        String url = recommendationServiceURL+"?productID=" + productID;
+        String url = recommendationServiceURL+"/recommendation?productID=" + productID;
         LOGGER.debug("Will call getRecommendations API on URL: {}", url);
         return webClient.get().uri(url).retrieve().bodyToFlux(Recommendation.class).log(LOGGER.getName(),Level.FINE).onErrorResume(error -> empty());
     }
@@ -122,7 +120,7 @@ public class ProductCompositeIntegration implements ProductService, ReviewServic
 
     @Override
     public Flux<Review> getReviews(int productID) {
-        String url = reviewServiceURL+"?productID=" + productID;
+        String url = reviewServiceURL+"/review?productID=" + productID;
         LOGGER.debug("Will call getReviews API on URL: {}", url);
         return webClient.get().uri(url).retrieve().bodyToFlux(Review.class).log(LOGGER.getName(),Level.FINE).onErrorResume(error -> empty());
     }

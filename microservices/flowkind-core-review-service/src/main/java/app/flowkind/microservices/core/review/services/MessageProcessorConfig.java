@@ -3,7 +3,7 @@ package app.flowkind.microservices.core.review.services;
 import app.flowkind.microservices.api.core.review.Review;
 import app.flowkind.microservices.api.core.review.ReviewService;
 import app.flowkind.microservices.api.event.Event;
-import app.flowkind.microservices.api.exceptions.EventProcessingException;
+import app.flowkind.microservices.utils.exceptions.EventProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

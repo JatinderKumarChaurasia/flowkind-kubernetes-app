@@ -2,7 +2,7 @@ package app.flowkind.microservices.core.recommendation.services;
 
 import app.flowkind.microservices.api.core.recommendation.Recommendation;
 import app.flowkind.microservices.api.core.recommendation.RecommendationService;
-import app.flowkind.microservices.api.exceptions.InvalidInputException;
+import app.flowkind.microservices.utils.exceptions.InvalidInputException;
 import app.flowkind.microservices.core.recommendation.persistence.RecommendationRepository;
 import app.flowkind.microservices.utils.http.ServiceUtil;
 import org.slf4j.Logger;

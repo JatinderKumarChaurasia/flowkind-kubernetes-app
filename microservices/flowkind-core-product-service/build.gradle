@@ -62,6 +62,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
 
+    // adding eureka support
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation "org.mapstruct:mapstruct:${mapStructVersion}"
     compileOnly "org.mapstruct:mapstruct-processor:${mapStructVersion}"
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -76,6 +78,7 @@ dependencies {
     testImplementation 'org.testcontainers:mongodb' //no version specified
     testImplementation 'org.testcontainers:testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
 
 }
 
