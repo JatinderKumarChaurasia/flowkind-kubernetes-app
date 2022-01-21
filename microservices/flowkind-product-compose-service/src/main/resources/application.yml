@@ -6,8 +6,8 @@ springdoc:
     path: /openapi/swagger-ui.html
   packages-to-scan: app.flowkind.microservices.compose.product
   paths-to-match: /**
-myip: "flowkind.eastus2.cloudapp.azure.com"
-
+#myip: "flowkind.eastus2.cloudapp.azure.com"
+myip: "localhost"
 api:
   common:
     version: 1.0.0
@@ -65,7 +65,7 @@ api:
         The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
         This means that a delete request of a non-existing product will return **200 Ok**.
 
-server.port: 7000
+server.port: 7004
 server.error.include-message: always
 
 logging:
@@ -116,6 +116,8 @@ spring:
     port: 5672
     username: guest
     password: guest
+  main:
+    allow-circular-references: true
 
 management:
   endpoint:

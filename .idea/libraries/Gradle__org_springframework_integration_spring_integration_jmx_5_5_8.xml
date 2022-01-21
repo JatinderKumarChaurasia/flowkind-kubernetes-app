@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.integration:spring-integration-jmx:5.5.8">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.integration/spring-integration-jmx/5.5.8/d529808015c2bcf055593c2d8f871fa4441fcc1e/spring-integration-jmx-5.5.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.integration/spring-integration-jmx/5.5.8/17e2c6d9c0556651edc29f2ec71aedbafc6a1c88/spring-integration-jmx-5.5.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

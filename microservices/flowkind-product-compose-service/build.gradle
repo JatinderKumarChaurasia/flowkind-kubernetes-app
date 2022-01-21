@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
+    id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -15,7 +15,7 @@ configurations {
 }
 
 ext {
-    springCloudVersion = "2020.0.4"
+    springCloudVersion = "2021.0.0"
 }
 
 jar {
@@ -36,9 +36,9 @@ build.doFirst {
     clean
 }
 
-distsDirName = "$projectDir/dist"
+distsDirName="$projectDir/dist"
 //buildDir = 'libs'
-libsDirName = "$projectDir/lib"
+libsDirName="$projectDir/lib"
 
 clean.doFirst {
     delete "${projectDir}/lib/*"
@@ -55,7 +55,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-kafka'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.10'
+    implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.4'
 //    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-support'
@@ -71,6 +71,8 @@ dependencies {
 
     testImplementation 'org.springframework.cloud:spring-cloud-stream::test-binder'
     testImplementation 'io.projectreactor:reactor-test'
+    // specific for macos
+    runtimeOnly 'io.netty:netty-resolver-dns-native-macos:4.1.73.Final:osx-aarch_64'
 }
 
 dependencyManagement {

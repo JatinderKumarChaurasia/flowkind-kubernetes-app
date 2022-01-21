@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
+    id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -24,7 +24,7 @@ repositories {
 
 ext {
     mapStructVersion='1.4.2.Final'
-    springCloudVersion='2020.0.4'
+    springCloudVersion='2021.0.0'
 }
 
 java {
@@ -66,7 +66,7 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
 
     // To enable the use of MongoDB and MySQL when running automated integration tests
-    implementation platform('org.testcontainers:testcontainers-bom:1.16.0') //import bom
+    implementation platform('org.testcontainers:testcontainers-bom:1.16.3') //import bom
     testImplementation 'org.testcontainers:mongodb' //no version specified
     testImplementation 'org.testcontainers:testcontainers'
     testImplementation 'org.testcontainers:junit-jupiter'

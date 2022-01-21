@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.cloud:spring-cloud-function-deployer:3.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-function-deployer/3.2.1/f0b95278d002101f19a3a16e651d7b244921e6ba/spring-cloud-function-deployer-3.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.cloud/spring-cloud-function-deployer/3.2.1/d95390feff92c2f7a6fe0216001d685768a6bc1c/spring-cloud-function-deployer-3.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,7 +1,7 @@
 server.port: 7002
 server.error.include-message: always
-myip: "flowkind.eastus2.cloudapp.azure.com"
-
+#myip: "flowkind.eastus2.cloudapp.azure.com"
+myip: "localhost"
 spring:
   jpa:
     hibernate:
@@ -9,9 +9,10 @@ spring:
   datasource:
     username: jatinder
     password: root
-    url: jdbc:mysql://flowkind.eastus2.cloudapp.azure.com/review-db
+#    url: jdbc:mysql://flowkind.eastus2.cloudapp.azure.com/review-db
     hikari:
       initialization-fail-timeout: 60000
+    url: jdbc:mysql://localhost/review-db
   cloud:
     function:
       definition: messageProcessor
@@ -64,3 +65,6 @@ management:
     web:
       exposure:
         include: '*'
+springdoc:
+  api-docs:
+    enabled: false

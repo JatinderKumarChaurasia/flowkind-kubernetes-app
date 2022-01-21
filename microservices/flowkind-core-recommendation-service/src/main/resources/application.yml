@@ -3,8 +3,8 @@ server:
   error:
     include-message: always
 
-myip: "flowkind.eastus2.cloudapp.azure.com"
-
+#myip: "flowkind.eastus2.cloudapp.azure.com"
+myip: "localhost"
 spring:
   data:
     mongodb:
@@ -64,3 +64,6 @@ logging:
     root: INFO
     app.flowkind: DEBUG
     org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+springdoc:
+  api-docs:
+    enabled: false

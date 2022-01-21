@@ -15,7 +15,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.4.2.Final/e55bd90d51cddd638c07d5bd89fc7535d4e3d069/mapstruct-processor-1.4.2.Final.jar" />
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.5.4/aaddc23ff2517732cbafb9dafbfe30a6714112b0/spring-boot-configuration-processor-2.5.4.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.6.3/6c0e21d31af4964436aa81db270b4d00f9c5436f/spring-boot-configuration-processor-2.6.3.jar" />
         </processorPath>
         <module name="flowkind-kubernetes-app.microservices.flowkind-core-product-service.main" />
         <module name="flowkind-kubernetes-app.microservices.flowkind-core-review-service.main" />

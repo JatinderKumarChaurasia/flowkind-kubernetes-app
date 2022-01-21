@@ -53,6 +53,7 @@ services:
 
   mysql:
     image: mysql:latest
+    platform: linux/amd64
     container_name: mysql_flowkind
     mem_reservation: 256m
     ports:
