@@ -78,6 +78,6 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
       - name: logging into github container registry
-        run: echo ${{ secrets.MY_GITHUB_SECRET_TOKEN }} | docker login ghcr.io -u jatinderkumarchaurasia --password-stdin
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u jatinderkumarchaurasia --password-stdin
       - name: pushing images into registry
         run: docker-compose push
